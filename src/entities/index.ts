@@ -1,0 +1,6 @@
+export { Chat } from './chat.entity'
+export { Channel } from './channel.entity'
+export { User } from './user.entity'
+export { ChatConfig } from './chatConfig.entity'
+export { Chatter } from './chatter.entity'
+export { Episode } from './episode.entity'

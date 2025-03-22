@@ -5,7 +5,13 @@
   "projects": {
     "angular-tailwind": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "css",
+          "standalone": true,
+          "changeDetection": "OnPush"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -18,6 +24,10 @@
             "browser": "src/main.ts",
             "polyfills": [],
             "tsConfig": "tsconfig.app.json",
+            "externalDependencies": [
+              "typeorm",
+              "@nestjs"
+            ],
             "assets": [
               {
                 "glob": "**/*",

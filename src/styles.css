@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background: var(--color-slate-950);
+}

@@ -1,3 +1,8 @@
+// Define __filename and __dirname globally
+globalThis.__filename = fileURLToPath(import.meta.url);
+globalThis.__dirname = dirname(global.__filename);
+import 'reflect-metadata';
+
 import {
   AngularNodeAppEngine,
   createNodeRequestHandler,
@@ -7,24 +12,16 @@ import {
 import express from 'express';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {NestFactory} from '@nestjs/core';
+import {ExpressAdapter} from '@nestjs/platform-express';
+import {AppModuleNest} from './server/app.module.nest';
+
 
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
-
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/**', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
 
 /**
  * Serve static files from /browser
@@ -37,10 +34,28 @@ app.use(
   }),
 );
 
+
+/**
+ * Initialize and Mount the NestJS Application
+ */
+async function bootstrapNestApp() {
+  const nestApp = await NestFactory.create(AppModuleNest, new ExpressAdapter(app));
+  nestApp.setGlobalPrefix('/api'); // All API routes will be under /api
+  await nestApp.init();
+}
+bootstrapNestApp()
+  .then(() => {
+    console.log('NestJS application successfully bootstrapped.');
+  })
+  .catch((err) => {
+    console.error('Failed to bootstrap NestJS application:', err);
+  });
+
+
 /**
  * Handle all other requests by rendering the Angular application.
  */
-app.use('/**', (req, res, next) => {
+app.get('*all', (req, res, next) => {
   angularApp
     .handle(req)
     .then((response) =>
