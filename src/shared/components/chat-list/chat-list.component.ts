@@ -9,9 +9,10 @@ import {
   EffectAllowed
 } from 'ngx-drag-drop';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {ChatService} from '../../services/chat/chat.service';
 import {AsyncPipe} from '@angular/common';
-import {Chat} from '../../shared/models';
+
+import {ChatService} from '#services/chat/chat.service';
+import { Chat } from '#models'
 
 export interface DraggableItem {
   id: number;

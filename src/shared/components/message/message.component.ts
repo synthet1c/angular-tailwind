@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, computed, input, Signal} from '@angular/core';
-import {Chat} from '../../shared/models';
-import {compute} from '../../utils';
+import {Chat} from '@models';
+import {compute} from '@utils';
 import {path, prop} from 'rambda';
 
 const getMessage = compute<string, Chat>(prop('message'));

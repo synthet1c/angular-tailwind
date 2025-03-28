@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Repository } from "typeorm";
-import {ChatEntity} from '../../server/entities';
-import {AppDataSource} from '../../db';
+import {ChatEntity} from '../../../server/entities';
+import {AppDataSource} from '../../../server/db';
 
 @Injectable({
   providedIn: "root", // Global service

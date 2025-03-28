@@ -20,7 +20,23 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022"
+    "module": "ES2022",
+    "baseUrl": "./",
+    "paths": {
+      "#components/*": ["src/shared/components/*"],
+      "#client/*": ["src/client/*"],
+      "#server/*": ["src/server/*"],
+      "#controllers/*": ["src/server/controllers/*"],
+      "#controllers": ["src/server/controllers"],
+      "#entities/*": ["src/server/entities/*"],
+      "#entities": ["src/server/entities"],
+      "#models": ["src/shared/models"],
+      "#services/*": ["src/shared/services/*"],
+      "#shared/*": ["src/shared/*"],
+      "#utils/*": ["src/shared/utils/*"],
+      "#utils": ["src/shared/utils"],
+      "#/*": ["src/"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

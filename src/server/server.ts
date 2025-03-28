@@ -14,7 +14,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {NestFactory} from '@nestjs/core';
 import {ExpressAdapter} from '@nestjs/platform-express';
-import {AppModuleNest} from './server/app.module.nest';
+import {AppModuleNest} from './app.module.nest';
 // import './data/seed';
 
 
