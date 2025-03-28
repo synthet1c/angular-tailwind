@@ -10,7 +10,7 @@ import {
 import {ChannelEntity} from './channel.entity';
 import {ChatterEntity} from './chatter.entity';
 import {EpisodeEntity} from './episode.entity';
-import {Chat, ChatStatus} from '../shared/models';
+import {Chat, ChatStatus} from '../../shared/models';
 
 @Entity()
 export class ChatEntity implements Chat {

@@ -40,9 +40,9 @@ var __setFunctionName = (this && this.__setFunctionName) || function (f, name, p
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Chatter = void 0;
 var typeorm_1 = require("typeorm");
-var user_entity_1 = require("./user.entity");
-var channel_entity_1 = require("./channel.entity");
-var chat_entity_1 = require("./chat.entity");
+var user_entity_1 = require("./user.entity.js");
+var channel_entity_1 = require("./channel.entity.js");
+var chat_entity_1 = require("./chat.entity.js");
 var Chatter = function () {
     var _classDecorators = [(0, typeorm_1.Entity)()];
     var _classDescriptor;

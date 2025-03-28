@@ -7,8 +7,8 @@ import {
 } from 'typeorm';
 import { ChannelEntity } from './channel.entity';
 import { ChatEntity } from './chat.entity';
-import {Episode} from '../shared/models';
-import { Timezone } from '../shared/models';
+import {Episode} from '../../shared/models';
+import { Timezone } from '../../shared/models';
 
 @Entity()
 export class EpisodeEntity {

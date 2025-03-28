@@ -1,4 +1,4 @@
-import {ChatEntity} from '../../entities/chat.entity';
+import {ChatEntity} from '../../server/entities/chat.entity';
 import {Observable} from 'rxjs';
 
 export interface ChatServiceInterface {

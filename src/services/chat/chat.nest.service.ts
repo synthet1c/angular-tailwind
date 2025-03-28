@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import {ChatServiceInterface} from './chat.service.interface';
-import {ChatEntity} from '../../entities';
+import {ChatEntity} from '../../server/entities';
 import {from, Observable, of} from 'rxjs';
 import {Repository} from 'typeorm';
 import {InjectRepository} from '@nestjs/typeorm';

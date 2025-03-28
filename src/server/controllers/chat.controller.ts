@@ -1,6 +1,6 @@
 import {Body, Controller, Get, Post} from '@nestjs/common';
 import {Observable, of} from 'rxjs';
-import {ChatEntity} from '../../entities';
+import {ChatEntity} from '../entities';
 import {ChatNestService} from '../../services/chat/chat.nest.service';
 
 @Controller('/chats')

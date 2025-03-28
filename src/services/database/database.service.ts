@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {DataSource, EntityTarget, Repository} from 'typeorm';
-import {ChannelEntity, ChatEntity, ChatConfigEntity, ChatterEntity, EpisodeEntity, UserEntity} from '../../entities';
+import {ChannelEntity, ChatEntity, ChatConfigEntity, ChatterEntity, EpisodeEntity, UserEntity} from '../../server/entities';
 
 const entities = [
   UserEntity,

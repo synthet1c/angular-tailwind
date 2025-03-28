@@ -1,5 +1,5 @@
 import {DataSource} from 'typeorm';
-import {ChannelEntity, ChatConfigEntity, ChatEntity, ChatterEntity, EpisodeEntity, UserEntity} from '../entities';
+import {ChannelEntity, ChatConfigEntity, ChatEntity, ChatterEntity, EpisodeEntity, UserEntity} from '../server/entities';
 import {faker} from '@faker-js/faker';
 
 import usersData from './users.json';
