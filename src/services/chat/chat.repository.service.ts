@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Repository } from "typeorm";
-import {ChatEntity} from '../../server/entities/chat.entity';
+import {ChatEntity} from '../../server/entities';
 import {AppDataSource} from '../../db';
 
 @Injectable({

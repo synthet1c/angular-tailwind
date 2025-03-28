@@ -1,6 +1,6 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {FirstComponent} from '../components/first/first.component';
+import {FirstComponent} from '../../components/first/first.component';
 
 @Component({
   selector: 'app-root',
