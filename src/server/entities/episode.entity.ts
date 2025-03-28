@@ -7,8 +7,7 @@ import {
 } from 'typeorm';
 import { ChannelEntity } from './channel.entity';
 import { ChatEntity } from './chat.entity';
-import {Episode} from '../../shared/models';
-import { Timezone } from '../../shared/models';
+import {Episode, Utils} from '#models';
 
 @Entity()
 export class EpisodeEntity {
@@ -28,7 +27,7 @@ export class EpisodeEntity {
   end!: Date
 
   @Column()
-  timezone!: Timezone;
+  timezone!: Utils.Timezone;
 
   @ManyToOne(() => ChannelEntity, (channel: ChannelEntity) => channel.episodes, { onDelete: 'CASCADE' })
   channel!: ChannelEntity;
@@ -36,7 +35,7 @@ export class EpisodeEntity {
   @OneToMany(() => ChatEntity, (chat: ChatEntity) => chat.episode, { cascade: true })
   chats!: ChatEntity[];
 
-  static create(episode: Partial<Episode>) {
+  static create(episode: Partial<Episode.Model>) {
     const newEpisode = new EpisodeEntity();
     Object.assign(newEpisode, episode);
     return newEpisode;

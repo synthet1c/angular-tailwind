@@ -12,7 +12,7 @@ export class ChatController {
 
   @Get()
   getChats(): Observable<ChatEntity[]> {
-    return this.chatService.getChats();
+    return this.chatService.getChats({});
   }
 
   @Post()

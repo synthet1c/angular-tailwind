@@ -1,10 +1,13 @@
 import {Channel} from './channel.model';
 
-export interface ChatConfig {
-  id: number;
-  channel: Channel;
-  ruleName: string;
-  description: string;
-  subscriberOnly: boolean;
-  appliesToVideo: boolean;
+export namespace ChatConfig {
+  export interface Model {
+    id: number;
+    channel: Channel.Model;
+    ruleName: string;
+    description: string;
+    subscriberOnly: boolean;
+    appliesToVideo: boolean;
+  }
+
 }

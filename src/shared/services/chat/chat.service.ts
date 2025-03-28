@@ -15,11 +15,11 @@ export class ChatService {
     console.log({ platform });
   }
 
-  getChats(): Observable<Chat[]> {
-    return this.http.get<Chat[]>('/api/chats');
+  getChats(): Observable<Chat.Model[]> {
+    return this.http.get<Chat.Model[]>('/api/chats');
   }
 
-  createChat(chat: Partial<Chat>): Observable<Chat> {
-    return this.http.post<Chat>('/api/chats', chat);
+  createChat(chat: Partial<Chat.Model>): Observable<Chat.Model> {
+    return this.http.post<Chat.Model>('/api/chats', chat);
   }
 }

@@ -10,10 +10,10 @@ import {
 import {ChannelEntity} from './channel.entity';
 import {ChatterEntity} from './chatter.entity';
 import {EpisodeEntity} from './episode.entity';
-import {Chat, ChatStatus} from '../../shared/models';
+import {Chat} from '#models';
 
 @Entity()
-export class ChatEntity implements Chat {
+export class ChatEntity implements Chat.Model {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -53,7 +53,7 @@ export class ChatEntity implements Chat {
   episode!: EpisodeEntity;
 
 
-  static create(chat: Partial<Chat>) {
+  static create(chat: Partial<Chat.Model>) {
     const newChat = new ChatEntity();
     Object.assign(newChat, chat);
     return newChat;

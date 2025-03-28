@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import {ChannelEntity} from './channel.entity';
 import {ChatterEntity} from './chatter.entity';
-import {iAuthUser, iUser} from '../../shared/models';
+import {User} from '#models';
 
 @Entity()
 export class UserEntity {
@@ -40,7 +40,7 @@ export class UserEntity {
   @UpdateDateColumn()
   updatedAt!: Date; // When the user record was last updated
 
-  static create(user: Partial<iUser | iAuthUser>) {
+  static create(user: Partial<User.iUser | User.iAuthUser>) {
     const newUser = new UserEntity();
     Object.assign(newUser, user);
     return newUser;

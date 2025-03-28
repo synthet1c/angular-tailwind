@@ -1,14 +1,18 @@
 import {Channel} from './channel.model';
 import {Chat} from './chat.model';
-import {Timezone} from './index';
+import {Utils} from './index';
 
-export interface Episode {
-  id: number;
-  title: string;
-  createdAt: Date;
-  start: Date;
-  end: Date;
-  timezone: Timezone;
-  channel: Channel;
-  chats: Chat[];
+export namespace Episode {
+
+  export interface Model {
+    id: number;
+    title: string;
+    createdAt: Utils.Date;
+    start: Utils.Date;
+    end: Utils.Date;
+    timezone: Utils.Timezone;
+    channel: Channel.Model;
+    chats: Chat.Model[];
+  }
 }
+

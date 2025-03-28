@@ -11,7 +11,7 @@ import {
 import {UserEntity} from './user.entity';
 import {ChannelEntity} from './channel.entity';
 import {ChatEntity} from './chat.entity';
-import {Chatter} from '../../shared/models';
+import {Chatter} from '#models';
 
 @Entity()
 export class ChatterEntity {
@@ -38,7 +38,7 @@ export class ChatterEntity {
   @OneToMany(() => ChatEntity, (chat) => chat.chatter)
   chats!: ChatEntity[];
 
-  static create(chatter: Partial<Chatter>) {
+  static create(chatter: Partial<Chatter.Model>) {
     const newChatter = new ChatterEntity();
     Object.assign(newChatter, chatter);
     return newChatter;

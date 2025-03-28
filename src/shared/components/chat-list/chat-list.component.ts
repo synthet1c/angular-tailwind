@@ -44,7 +44,7 @@ export class ChatListComponent implements OnInit {
   ngOnInit() {
     console.log('ChatListComponent:ngOnInit');
     this.chatService.getChats()
-      .subscribe((items: Chat[]) => {
+      .subscribe((items: Chat.Model[]) => {
         this.items$.next(items);
       });
     this.items$.subscribe((items) => {

@@ -1,7 +1,8 @@
-import {ChatEntity} from '../../../server/entities/chat.entity';
+import {ChatEntity} from '#entities';
 import {Observable} from 'rxjs';
+import {Chat} from '#models';
 
 export interface ChatServiceInterface {
-  getChats(): Observable<ChatEntity[]>
-  createChat(chat: Partial<ChatEntity>): Observable<ChatEntity>
+  getChats(params?: Chat.params.getChats): Observable<ChatEntity[]>;
+  createChat(chat: Partial<ChatEntity>): Observable<ChatEntity>;
 }

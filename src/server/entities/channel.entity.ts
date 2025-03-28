@@ -12,10 +12,10 @@ import {UserEntity} from './user.entity';
 import {ChatEntity} from './chat.entity';
 import {ChatConfigEntity} from './chatConfig.entity';
 import {EpisodeEntity} from './episode.entity';
-import {Channel} from '../../shared/models';
+import {Channel} from '#models';
 
 @Entity()
-export class ChannelEntity implements Channel {
+export class ChannelEntity implements Channel.Model {
   @PrimaryGeneratedColumn()
   id!: number;
 
