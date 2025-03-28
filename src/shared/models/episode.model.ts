@@ -1,6 +1,6 @@
 import {Channel} from './channel.model';
 import {Chat} from './chat.model';
-import {Timezone} from '../models';
+import {Timezone} from './index';
 
 export interface Episode {
   id: number;

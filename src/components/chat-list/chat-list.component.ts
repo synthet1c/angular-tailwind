@@ -11,7 +11,7 @@ import {
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ChatService} from '../../services/chat/chat.service';
 import {AsyncPipe} from '@angular/common';
-import {Chat} from '../../models';
+import {Chat} from '../../shared/models';
 
 export interface DraggableItem {
   id: number;

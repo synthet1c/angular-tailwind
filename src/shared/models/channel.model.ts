@@ -1,4 +1,4 @@
-import {Chat, User, Episode, ChatConfig} from './';
+import {Chat, User, Episode, ChatConfig} from './index';
 
 export interface Channel {
   id: number;

@@ -1,4 +1,4 @@
-import {Channel, Chatter, Episode, Time} from './';
+import {Channel, Chatter, Episode, Time} from './index';
 
 export enum ChatStatus {
   NEW = 'NEW',

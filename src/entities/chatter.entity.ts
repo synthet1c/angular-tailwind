@@ -11,7 +11,7 @@ import {
 import {UserEntity} from './user.entity';
 import {ChannelEntity} from './channel.entity';
 import {ChatEntity} from './chat.entity';
-import {Chatter} from '../models';
+import {Chatter} from '../shared/models';
 
 @Entity()
 export class ChatterEntity {

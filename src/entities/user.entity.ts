@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import {ChannelEntity} from './channel.entity';
 import {ChatterEntity} from './chatter.entity';
-import {iAuthUser, iUser} from '../models';
+import {iAuthUser, iUser} from '../shared/models';
 
 @Entity()
 export class UserEntity {

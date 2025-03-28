@@ -6,7 +6,7 @@ import usersData from './users.json';
 import channelsData from './channels.json';
 import episodesData from './episode.json';
 import chatConfigs from './chatConfig.json';
-import {ChatStatus, Timezone} from '../models';
+import {ChatStatus, Timezone} from '../shared/models';
 
 const entities = [
   UserEntity,

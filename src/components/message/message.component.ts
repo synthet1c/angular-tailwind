@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, computed, input, Signal} from '@angular/core';
-import {Chat} from '../../models';
+import {Chat} from '../../shared/models';
 import {compute} from '../../utils';
 import {path, prop} from 'rambda';
 
