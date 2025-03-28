@@ -1,26 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import {ChatServiceInterface} from './chat.service.interface';
-import {Chat} from '../../entities/chat.entity';
+import {ChatEntity} from '../../entities';
 import {from, Observable, of} from 'rxjs';
 import {Repository} from 'typeorm';
 import {InjectRepository} from '@nestjs/typeorm';
 
 @Injectable()
-export class ChatServerService implements ChatServiceInterface {
+export class ChatNestService implements ChatServiceInterface {
 
   constructor(
-    @InjectRepository(Chat) private repository: Repository<Chat>
+    @InjectRepository(ChatEntity) private repository: Repository<ChatEntity>
   ) { }
 
-  getChats(): Observable<Chat[]> {
+  getChats(): Observable<ChatEntity[]> {
     return from(
       this.repository.find({
         take: 10,
+        relations: ['chatter', 'channel'],
       })
     );
   }
 
-  createChat(chat: Partial<Chat>): Observable<Chat> {
+  createChat(chat: Partial<ChatEntity>): Observable<ChatEntity> {
     const newChat = this.repository.create(chat);
     return from(this.repository.save(newChat));
   }

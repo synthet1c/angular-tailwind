@@ -1,0 +1,90 @@
+[
+  {
+    "channel": "bigtech",
+    "ruleName": "$3",
+    "description": "TTS Only",
+    "price": 3,
+    "pricePerChar": null,
+    "appliesToVideo": false,
+    "subscriberOnly": false,
+    "maxChars": 180,
+    "videoLength": 0
+  },
+  {
+    "channel": "bigtech",
+    "ruleName": "$5",
+    "description": "Short Video",
+    "price": 5.55,
+    "pricePerChar": null,
+    "appliesToVideo": true,
+    "subscriberOnly": false,
+    "maxChars": 180,
+    "videoLength": 3
+  },
+  {
+    "channel": "bigtech",
+    "ruleName": "$10",
+    "description": "Long Video",
+    "price": 9.99,
+    "pricePerChar": null,
+    "appliesToVideo": true,
+    "subscriberOnly": false,
+    "maxChars": 180,
+    "videoLength": 5
+  },
+  {
+    "channel": "bigtech",
+    "ruleName": "Waffins Video",
+    "description": "Waffins Video",
+    "price": 100,
+    "pricePerChar": null,
+    "appliesToVideo": true,
+    "subscriberOnly": false,
+    "maxChars": 180,
+    "videoLength": 60
+  },
+  {
+    "channel": "nickjfuentes",
+    "ruleName": "$10",
+    "description": "TTS Only $10",
+    "price": 10,
+    "pricePerChar": null,
+    "appliesToVideo": false,
+    "subscriberOnly": false,
+    "maxChars": 180,
+    "videoLength": 0
+  },
+  {
+    "channel": "nickjfuentes",
+    "ruleName": "$20",
+    "description": "TTS Only $20",
+    "price": 20,
+    "pricePerChar": null,
+    "appliesToVideo": false,
+    "subscriberOnly": false,
+    "maxChars": 180,
+    "videoLength": 0
+  },
+  {
+    "channel": "nickjfuentes",
+    "ruleName": "$50",
+    "description": "TTS Only $50",
+    "price": 50,
+    "pricePerChar": null,
+    "appliesToVideo": false,
+    "subscriberOnly": false,
+    "maxChars": 180,
+    "videoLength": 0
+  },
+  {
+    "channel": "nickjfuentes",
+    "ruleName": "$100",
+    "description": "Big Shout out!",
+    "price": 100,
+    "pricePerChar": null,
+    "appliesToVideo": false,
+    "subscriberOnly": false,
+    "maxChars": 180,
+    "videoLength": 0
+  }
+]

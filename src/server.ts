@@ -15,6 +15,7 @@ import { fileURLToPath } from 'node:url';
 import {NestFactory} from '@nestjs/core';
 import {ExpressAdapter} from '@nestjs/platform-express';
 import {AppModuleNest} from './server/app.module.nest';
+// import './data/seed';
 
 
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));

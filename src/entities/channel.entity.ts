@@ -1,11 +1,21 @@
-import {Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
-import {User} from './user.entity';
-import {Chat} from './chat.entity';
-import {ChatConfig} from './chatConfig.entity';
-import {Episode} from './episode.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn
+} from 'typeorm';
+import {UserEntity} from './user.entity';
+import {ChatEntity} from './chat.entity';
+import {ChatConfigEntity} from './chatConfig.entity';
+import {EpisodeEntity} from './episode.entity';
+import {Channel} from '../models';
 
 @Entity()
-export class Channel {
+export class ChannelEntity implements Channel {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -18,21 +28,31 @@ export class Channel {
   @Column()
   description!: string;
 
-  @ManyToOne(() => User, (user) => user.channels)
+  @ManyToOne(() => UserEntity, (user) => user.channels)
   @JoinColumn()
-  owner!: User;
+  owner!: UserEntity;
 
   @CreateDateColumn()
   createdAt!: Date;
 
-  @OneToMany(() => Chat, (chat: Chat) => chat.channel)
-  chats!: Chat[];
+  @DeleteDateColumn()
+  deletedAt!: Date
 
-  @OneToMany(() => ChatConfig, (chatConfig) => chatConfig.channel, {
+  @OneToMany(() => ChatEntity, (chat: ChatEntity) => chat.channel)
+  chats!: ChatEntity[];
+
+  @OneToMany(() => ChatConfigEntity, (chatConfig) => chatConfig.channel, {
     cascade: true,
   })
-  chatConfigs!: ChatConfig[]; // Array of rules for chat pricing
+  chatConfigs!: ChatConfigEntity[]; // Array of rules for chat pricing
 
-  @OneToMany(() => Episode, (episode: Episode) => episode.channel, { cascade: true })
-  episodes!: Episode[];
+  @OneToMany(() => EpisodeEntity, (episode: EpisodeEntity) => episode.channel, { cascade: true })
+  episodes!: EpisodeEntity[];
+
+  static create(channel: Partial<ChannelEntity>) {
+    const newChannel = new ChannelEntity();
+    Object.assign(newChannel, channel);
+    return newChannel;
+  }
+
 }

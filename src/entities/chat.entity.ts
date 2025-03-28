@@ -1,29 +1,32 @@
 import {
   Column,
   CreateDateColumn,
-  DataSource,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
-  Repository
 } from 'typeorm';
-import {Channel} from './channel.entity';
-import {Chatter} from './chatter.entity';
-import {Episode} from './episode.entity';
+import {ChannelEntity} from './channel.entity';
+import {ChatterEntity} from './chatter.entity';
+import {EpisodeEntity} from './episode.entity';
+import {Chat, ChatStatus} from '../models';
 
 @Entity()
-export class Chat {
+export class ChatEntity implements Chat {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Channel, (channel) => channel.chats)
+  @ManyToOne(() => ChannelEntity, (channel) => channel.chats)
   @JoinColumn()
-  channel!: Channel;
+  channel!: ChannelEntity;
 
-  @ManyToOne(() => Chatter, (chatter) => chatter.chats)
+  @ManyToOne(() => ChatterEntity, (chatter) => chatter.chats)
   @JoinColumn()
-  chatter!: Chatter;
+  chatter!: ChatterEntity;
+
+  @Column()
+  status!: string;
 
   @Column("decimal", { precision: 10, scale: 2 })
   price!: number; // Calculated final price of this chat message
@@ -43,7 +46,16 @@ export class Chat {
   @CreateDateColumn()
   createdAt!: Date;
 
-  @ManyToOne(() => Episode, (episode) => episode.chats, { onDelete: 'CASCADE' })
-  episode!: Episode;
+  @DeleteDateColumn()
+  deletedAt!: Date
 
+  @ManyToOne(() => EpisodeEntity, (episode) => episode.chats, { onDelete: 'CASCADE' })
+  episode!: EpisodeEntity;
+
+
+  static create(chat: Partial<Chat>) {
+    const newChat = new ChatEntity();
+    Object.assign(newChat, chat);
+    return newChat;
+  }
 }

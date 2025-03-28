@@ -1,5 +1,5 @@
 import {DataSource} from 'typeorm';
-import {Chat, ChatConfig, User, Channel, Chatter} from '../entities';
+import {ChatEntity, ChatConfigEntity, UserEntity, ChannelEntity, ChatterEntity} from '../entities';
 
 export const AppDataSource = new DataSource({
   type: "sqlite",
@@ -7,11 +7,11 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   logging: true,
   entities: [
-    User,
-    Channel,
-    Chatter,
-    ChatConfig,
-    Chat,
+    UserEntity,
+    ChannelEntity,
+    ChatterEntity,
+    ChatConfigEntity,
+    ChatEntity,
   ],
   subscribers: [],
   migrations: [],

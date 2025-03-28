@@ -1,9 +1,18 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany} from 'typeorm';
-import {Channel} from './channel.entity';
-import {Chatter} from './chatter.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany,
+  DeleteDateColumn
+} from 'typeorm';
+import {ChannelEntity} from './channel.entity';
+import {ChatterEntity} from './chatter.entity';
+import {iAuthUser, iUser} from '../models';
 
 @Entity()
-export class User {
+export class UserEntity {
   @PrimaryGeneratedColumn("uuid")
   id!: string; // Unique user ID
 
@@ -16,15 +25,24 @@ export class User {
   @Column({ default: "" })
   avatarUrl?: string; // Profile picture or avatar URL
 
-  @OneToMany(() => Channel, (channel) => channel.owner)
-  channels!: Channel[];
+  @OneToMany(() => ChannelEntity, (channel) => channel.owner)
+  channels!: ChannelEntity[];
 
-  @OneToMany(() => Chatter, (chatter) => chatter.user)
-  chatters!: Chatter[];
+  @OneToMany(() => ChatterEntity, (chatter) => chatter.user)
+  chatters!: ChatterEntity[];
 
   @CreateDateColumn()
   createdAt!: Date; // When the user record was created
 
+  @DeleteDateColumn()
+  deletedAt!: Date
+
   @UpdateDateColumn()
   updatedAt!: Date; // When the user record was last updated
+
+  static create(user: Partial<iUser | iAuthUser>) {
+    const newUser = new UserEntity();
+    Object.assign(newUser, user);
+    return newUser;
+  }
 }

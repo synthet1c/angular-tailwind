@@ -1,20 +1,30 @@
-import {Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
-import {User} from './user.entity';
-import {Channel} from './channel.entity';
-import {Chat} from './chat.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn
+} from 'typeorm';
+import {UserEntity} from './user.entity';
+import {ChannelEntity} from './channel.entity';
+import {ChatEntity} from './chat.entity';
+import {Chatter} from '../models';
 
 @Entity()
-export class Chatter {
+export class ChatterEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => User, (user) => user.chatters)
+  @ManyToOne(() => UserEntity, (user) => user.chatters)
   @JoinColumn()
-  user!: User;
+  user!: UserEntity;
 
-  @ManyToOne(() => Channel, (channel) => channel.id)
+  @ManyToOne(() => ChannelEntity, (channel) => channel.id)
   @JoinColumn()
-  channel!: Channel;
+  channel!: ChannelEntity;
 
   @Column()
   nickname!: string;
@@ -22,6 +32,15 @@ export class Chatter {
   @CreateDateColumn()
   createdAt!: Date;
 
-  @OneToMany(() => Chat, (chat) => chat.chatter)
-  chats!: Chat[];
+  @DeleteDateColumn()
+  deletedAt!: Date
+
+  @OneToMany(() => ChatEntity, (chat) => chat.chatter)
+  chats!: ChatEntity[];
+
+  static create(chatter: Partial<Chatter>) {
+    const newChatter = new ChatterEntity();
+    Object.assign(newChatter, chatter);
+    return newChatter;
+  }
 }

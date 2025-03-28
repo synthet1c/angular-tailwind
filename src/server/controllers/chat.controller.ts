@@ -1,25 +1,22 @@
 import {Body, Controller, Get, Post} from '@nestjs/common';
-import {ChatService} from '../../services/chat/chat.service';
 import {Observable, of} from 'rxjs';
-import {Chat} from '../../entities';
+import {ChatEntity} from '../../entities';
+import {ChatNestService} from '../../services/chat/chat.nest.service';
 
 @Controller('/chats')
 export class ChatController {
 
   constructor(
-    private readonly chatService: ChatService,
+    private readonly chatService: ChatNestService,
   ) {}
 
   @Get()
-  getChats(): Observable<any[]> {
-    return of([{
-      message: 'chats'
-    }])
+  getChats(): Observable<ChatEntity[]> {
     return this.chatService.getChats();
   }
 
   @Post()
-  createChat(@Body() chatData: Partial<Chat>): Observable<Chat> {
+  createChat(@Body() chatData: Partial<ChatEntity>): Observable<ChatEntity> {
     return this.chatService.createChat(chatData);
   }
 

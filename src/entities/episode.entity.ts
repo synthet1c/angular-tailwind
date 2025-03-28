@@ -5,11 +5,13 @@ import {
   ManyToOne,
   OneToMany, CreateDateColumn
 } from 'typeorm';
-import { Channel } from './channel.entity';
-import { Chat } from './chat.entity';
+import { ChannelEntity } from './channel.entity';
+import { ChatEntity } from './chat.entity';
+import {Episode} from '../models';
+import { Timezone } from '../models';
 
 @Entity()
-export class Episode {
+export class EpisodeEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -19,9 +21,24 @@ export class Episode {
   @CreateDateColumn()
   createdAt!: Date;
 
-  @ManyToOne(() => Channel, (channel: Channel) => channel.episodes, { onDelete: 'CASCADE' })
-  channel!: Channel;
+  @Column()
+  start!: Date
 
-  @OneToMany(() => Chat, (chat: Chat) => chat.episode, { cascade: true })
-  chats!: Chat[];
+  @Column()
+  end!: Date
+
+  @Column()
+  timezone!: Timezone;
+
+  @ManyToOne(() => ChannelEntity, (channel: ChannelEntity) => channel.episodes, { onDelete: 'CASCADE' })
+  channel!: ChannelEntity;
+
+  @OneToMany(() => ChatEntity, (chat: ChatEntity) => chat.episode, { cascade: true })
+  chats!: ChatEntity[];
+
+  static create(episode: Partial<Episode>) {
+    const newEpisode = new EpisodeEntity();
+    Object.assign(newEpisode, episode);
+    return newEpisode;
+  }
 }

@@ -1,0 +1,40 @@
+<div
+  class="p-4 flex flex-col gap-4"
+  dndDropzone
+  dndEffectAllowed="move"
+  (dndDrop)="onDrop($event)"
+>
+  <div dndPlaceholderRef class="border-1 bg-slate-700 border-slate-950 shadow rounded">
+    <div class="p-2 flex gap-4">
+      <div class="size-12 shrink-0 p-2 bg-slate-600">
+        <img class="w-full" src="/favicon.ico" alt="">
+      </div>
+      <div class="flex-col">
+        <h3 class="text-gray-300 mb-2">{{currentDraggedItem?.chatter?.nickname || 'Nickname'}}</h3>
+        <p class="text-gray-500">{{currentDraggedItem?.message || 'Message'}}</p>
+      </div>
+    </div>
+  </div>
+
+  @for (chat of items$ | async; track chat.id) {
+    <div
+      [dndDraggable]="chat"
+      dndEffectAllowed="copyMove"
+      (dndEnd)="onDragEnd(chat, $event)"
+      (dndDrag)="onDrag(chat, $event)"
+      (dndStart)="onStart(chat, $event)"
+      (dndMoved)="onDragMoved(chat, $event)"
+      class="border-1 bg-slate-800 border-slate-950 shadow rounded"
+    >
+      <div class="p-2 flex gap-4">
+        <div class="size-12 shrink-0 p-2 bg-slate-600">
+          <img class="w-full" src="/favicon.ico" alt="">
+        </div>
+        <div class="flex-col">
+          <h3 class="text-gray-300 mb-2">{{chat.chatter.nickname}}</h3>
+          <p class="text-gray-500">{{chat.message}}</p>
+        </div>
+      </div>
+    </div>
+  }
+</div>
