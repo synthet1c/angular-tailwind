@@ -14,7 +14,8 @@ import {AsyncPipe, CurrencyPipe} from '@angular/common';
 import {ChatService} from '#services/chat/chat.service';
 import { Chat } from '#models'
 import {TimeAgoPipe} from '#shared/pipes/TimeAgoPipe';
-import {SelectComponent} from '#components/select/select.component';
+import {ActivatedRoute} from '@angular/router';
+import {getParam} from '#utils/getParam';
 
 export interface DraggableItem extends Chat.Model {}
 
@@ -26,7 +27,6 @@ export interface DraggableItem extends Chat.Model {}
     DndPlaceholderRefDirective,
     AsyncPipe,
     TimeAgoPipe,
-    SelectComponent,
     CurrencyPipe,
   ],
   templateUrl: './chat-list.component.html',
@@ -37,12 +37,19 @@ export interface DraggableItem extends Chat.Model {}
 export class ChatListComponent implements OnInit {
   public items$ = new BehaviorSubject<DraggableItem[]>([]);
 
+  private route = inject(ActivatedRoute);
+  public channel$ = new BehaviorSubject(null);
+
   private chatService = inject(ChatService);
   public currentDraggedItem: DraggableItem | null = null;
 
   ngOnInit() {
     console.log('ChatListComponent:ngOnInit');
-    this.chatService.getChats()
+    this.route.paramMap.pipe(getParam('channel')).subscribe(this.channel$)
+
+    this.chatService.getChats({
+      channel: this.channel$.getValue(),
+    })
       .subscribe((items: Chat.Model[]) => {
         this.items$.next(items);
       });

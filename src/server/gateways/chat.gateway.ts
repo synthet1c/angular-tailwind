@@ -35,8 +35,8 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   @SubscribeMessage('getChats')
-  getChats(@MessageBody() { take, page }: Chat.params.getChats): Observable<ChatEntity[]> {
-    return this.chatService.getChats({ take, page })
+  getChats(@MessageBody() { channel, take, page }: Chat.params.getChats): Observable<ChatEntity[]> {
+    return this.chatService.getChats({ channel, take, page })
   }
 
   @SubscribeMessage('sort')

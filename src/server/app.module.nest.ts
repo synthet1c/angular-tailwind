@@ -24,7 +24,7 @@ const entities = [
       synchronize: true,
     }),
     TypeOrmModule.forFeature(entities),
-    GatewaysModule,
+    // GatewaysModule,
   ],
   controllers: [
     ChatController,

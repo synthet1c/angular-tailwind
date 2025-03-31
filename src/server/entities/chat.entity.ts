@@ -4,7 +4,7 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
-  ManyToOne,
+  ManyToOne, OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import {ChannelEntity} from './channel.entity';
@@ -17,9 +17,8 @@ export class ChatEntity implements Chat.Model {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => ChannelEntity, (channel) => channel.chats)
-  @JoinColumn()
-  channel!: ChannelEntity;
+  @ManyToOne(() => ChannelEntity, (channel) => channel.chats, { onDelete: 'CASCADE' }) // Relationship definition
+  channel!: ChannelEntity; // Each chat belongs to a single channel
 
   @ManyToOne(() => ChatterEntity, (chatter) => chatter.chats)
   @JoinColumn()

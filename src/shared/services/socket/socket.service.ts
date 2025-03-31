@@ -1,7 +1,7 @@
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { io, Socket } from 'socket.io-client';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ export class SocketService {
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       // Initialize the socket if running on the browser
-      this.socket = io('http://localhost:8080/chats');
+      // this.socket = io('http://localhost:8080/chats');
     }
   }
 
@@ -23,6 +23,9 @@ export class SocketService {
   }
 
   get<T = unknown>(event: string, data: any): Observable<T> {
+    if (!this.socket) {
+      return of(null);
+    }
     return new Observable((subscriber) => {
       this.socket.emit(event, data, (result: T) => {
         subscriber.next(result);

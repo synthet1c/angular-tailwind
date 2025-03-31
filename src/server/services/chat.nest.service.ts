@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import {ChatServiceInterface} from '#services/chat/chat.service.interface';
 import {ChatEntity, ChatterEntity} from '#entities';
-import {concatMap, from, Observable, of} from 'rxjs';
+import {from, Observable} from 'rxjs';
 import {Repository} from 'typeorm';
 import {InjectRepository} from '@nestjs/typeorm';
 import {Chat, Chatter} from '#models';
-
 
 
 @Injectable()
@@ -16,11 +15,17 @@ export class ChatNestService implements ChatServiceInterface {
     @InjectRepository(ChatterEntity) private chatterRepository: Repository<ChatterEntity>
   ) { }
 
-  getChats({ take = 10, page = 0 }: Chat.params.getChats = {}): Observable<ChatEntity[]> {
+
+  getChats({ channel, take = 10, page = 0 }: Chat.params.getChats = { channel: null }): Observable<ChatEntity[]> {
     return from(
       this.repository.find({
-        // take,
-        // skip: take * page,
+        take,
+        skip: take * page,
+        where: {
+          channel: {
+            url: channel
+          },
+        },
         relations: ['chatter', 'channel'],
       })
     );

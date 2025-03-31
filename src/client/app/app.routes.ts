@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import {ChatListComponent} from '#components/chat-list/chat-list.component';
+import {ChannelPage} from '#shared/pages/channel/channel.page';
 
 export const routes: Routes = [
   {
-    path: 'list',
-    component: ChatListComponent,
+    path: 'channels/:channel',
+    component: ChannelPage,
   }
 ];

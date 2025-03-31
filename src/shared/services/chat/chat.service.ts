@@ -15,8 +15,10 @@ export class ChatService {
   private http = inject(HttpClient);
   private sortService = inject(SortService);
 
-  getChats(): Observable<Chat.Model[]> {
-    this.http.get<Chat.Model[]>('/api/chats').subscribe((chats) => this.chats$.next(chats));
+  getChats({ channel }: { channel: string }): Observable<Chat.Model[]> {
+    const params = { channel };
+    this.http.get<Chat.Model[]>('/api/chats', { params })
+      .subscribe((chats) => this.chats$.next(chats));
     return this.chats$;
   }
 

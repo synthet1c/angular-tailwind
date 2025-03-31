@@ -35,6 +35,7 @@ export namespace Chat {
 
   export namespace params {
     export interface getChats {
+      channel: string;
       take?: number;
       page?: number;
     }

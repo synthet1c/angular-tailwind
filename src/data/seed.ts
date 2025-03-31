@@ -91,7 +91,7 @@ const createChatConfigs = async (name: string) => {
   console.log('SEEDING: createChatConfigs');
   const channel = await repository.channel.findOne({
     where: {
-      name: name
+      url: name
     }
   });
   const configs = getChatConfigs(name)
@@ -124,7 +124,7 @@ const createEpisodes = async () => {
 
 const createChats = async (channelName: string, count = 20) => {
   console.log('SEEDING: createChats');
-  const channel = await repository.channel.findOne({ where: { name: channelName }})
+  const channel = await repository.channel.findOne({ where: { url: channelName }})
   const chatters = await repository.chatter.find({ take: 10 });
   const chats = [];
 
@@ -133,10 +133,13 @@ const createChats = async (channelName: string, count = 20) => {
     const message = faker.lorem.sentence({ min: 10, max: 20 })
     const chatConfigs = await repository.chatConfig.find({
       where: {
-        channel: channel
-      }
+        channel: {
+          url: channel.url
+        }
+      },
     });
-    const chatConfig = chatConfigs[faker.number.int({ min: 0, max: chatConfigs.length - 1 })]
+    const maxConfigs = chatConfigs.length;
+    const chatConfig = chatConfigs[Math.floor(Math.random() * maxConfigs)];
     chats.push({
       message,
       channel: channel,
