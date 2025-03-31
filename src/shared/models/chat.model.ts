@@ -2,6 +2,14 @@ import {Channel, Chatter, Episode, Utils} from './index';
 
 export namespace Chat {
 
+  export enum Sort {
+    RECOMMENDED = 'Recommended',
+    OLDEST = 'Oldest',
+    NEWEST = 'Newest',
+    MOST_EXPENSIVE = 'Most Expensive',
+    LEAST_EXPENSIVE = 'Least Expensive',
+  }
+
   export enum Status {
     NEW = 'NEW',
     AUTHORIZING = 'AUTHORIZING',

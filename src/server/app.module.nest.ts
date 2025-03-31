@@ -1,9 +1,10 @@
 import {Module as NestModule, OnModuleInit} from '@nestjs/common';
 import {TypeOrmModule} from '@nestjs/typeorm';
-import {ChannelEntity, ChatConfigEntity, ChatEntity, ChatterEntity, UserEntity, EpisodeEntity} from './entities';
+import {ChannelEntity, ChatConfigEntity, ChatEntity, ChatterEntity, UserEntity, EpisodeEntity} from '#entities';
 import {ChatController} from '#controllers/chat.controller';
 import {HelloController} from '#controllers/hello.controller';
-import {ChatNestService} from '#services/chat/chat.nest.service';
+import {ChatNestService} from '#server/services/chat.nest.service';
+import {GatewaysModule} from '#server/gateways/gateways.module';
 
 const entities = [
   UserEntity,
@@ -22,7 +23,8 @@ const entities = [
       entities,
       synchronize: true,
     }),
-    TypeOrmModule.forFeature(entities)
+    TypeOrmModule.forFeature(entities),
+    GatewaysModule,
   ],
   controllers: [
     ChatController,

@@ -12,5 +12,12 @@ export namespace Chatter {
     deletedAt: Date;
     chats: Chat.Model[];
   }
+
+  export interface Metrics {
+    totalChats: number;
+    chatsInLastMonth: number;
+    chatsInLastDay: number;
+    chatsInLastWeek: number;
+  }
 }
 

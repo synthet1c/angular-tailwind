@@ -9,18 +9,14 @@ import {
   EffectAllowed
 } from 'ngx-drag-drop';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {AsyncPipe} from '@angular/common';
+import {AsyncPipe, CurrencyPipe} from '@angular/common';
 
 import {ChatService} from '#services/chat/chat.service';
 import { Chat } from '#models'
+import {TimeAgoPipe} from '#shared/pipes/TimeAgoPipe';
+import {SelectComponent} from '#components/select/select.component';
 
-export interface DraggableItem {
-  id: number;
-  chatter: {
-    nickname: string;
-  }
-  message: string;
-}
+export interface DraggableItem extends Chat.Model {}
 
 @Component({
   selector: 'app-chat-list',
@@ -29,6 +25,9 @@ export interface DraggableItem {
     DndDropzoneDirective,
     DndPlaceholderRefDirective,
     AsyncPipe,
+    TimeAgoPipe,
+    SelectComponent,
+    CurrencyPipe,
   ],
   templateUrl: './chat-list.component.html',
   styleUrl: './chat-list.component.css',

@@ -1,29 +1,19 @@
 import {
   MessageBody,
   OnGatewayConnection,
-  OnGatewayDisconnect, SubscribeMessage,
+  OnGatewayDisconnect,
+  SubscribeMessage,
   WebSocketGateway,
   WebSocketServer
 } from '@nestjs/websockets';
 import {Server} from 'socket.io';
-import {ChatNestService} from '#services/chat/chat.nest.service';
+import {ChatNestService} from '#server/services/chat.nest.service';
 import {Observable, of} from 'rxjs';
 import {ChatEntity} from '#entities';
+import { Chat } from '#models';
 
-export interface GatewayAction {
-  action: string;
-  data: unknown;
-}
-
-export namespace ChatGateWayActions {
-  export interface getChats {
-    take?: number;
-    page?: number;
-  }
-}
-
-@WebSocketGateway({
-  namespace: '/chats',
+@WebSocketGateway(8080, {
+  namespace: 'chats',
   cors: true,
 })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
@@ -44,19 +34,18 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     console.log(`Client disconnected: ${client.id}`);
   }
 
-  @SubscribeMessage('action')
-  handleAction(@MessageBody() body: GatewayAction): Observable<ChatEntity[]> {
-    switch (body.action) {
-      case 'GET_CHATS': return this.getChats(body.data);
-    }
-    return of(null);
-  }
-
-
   @SubscribeMessage('getChats')
-  getChats({ take, page }: ChatGateWayActions.getChats): Observable<ChatEntity[]> {
+  getChats(@MessageBody() { take, page }: Chat.params.getChats): Observable<ChatEntity[]> {
     return this.chatService.getChats({ take, page })
   }
 
+  @SubscribeMessage('sort')
+  sort(@MessageBody() algorithm: Chat.Sort): Observable<Chat.Sort> {
+    console.log('ChatGateway:sort', algorithm);
+    if (algorithm in Chat.Sort) {
+      console.log('ChatGateway:sort in Chat.Sort', algorithm);
+    }
+    return of(algorithm);
+  }
 
 }

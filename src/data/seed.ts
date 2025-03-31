@@ -6,7 +6,9 @@ import usersData from './users.json';
 import channelsData from './channels.json';
 import episodesData from './episode.json';
 import chatConfigs from './chatConfig.json';
-import {ChatStatus, Timezone} from '../shared/models';
+import {Chat, Utils} from '#models';
+import Timezone = Utils.Timezone;
+import {generateRandomCreatedAt} from './generateRandomCreatedAt';
 
 const entities = [
   UserEntity,
@@ -124,6 +126,7 @@ const createChats = async (channelName: string, count = 20) => {
   console.log('SEEDING: createChats');
   const channel = await repository.channel.findOne({ where: { name: channelName }})
   const chatters = await repository.chatter.find({ take: 10 });
+  const chats = [];
 
   while (count > 0) {
     const chatter = chatters[faker.number.int({ min: 0, max: chatters.length - 1 })];
@@ -134,15 +137,22 @@ const createChats = async (channelName: string, count = 20) => {
       }
     });
     const chatConfig = chatConfigs[faker.number.int({ min: 0, max: chatConfigs.length - 1 })]
-    const newChat = ChatEntity.create({
+    chats.push({
       message,
       channel: channel,
       chatter: chatter,
       price: chatConfig.price,
-      status: ChatStatus.NEW,
+      status: Chat.Status.NEW,
+      createdAt: generateRandomCreatedAt(1),
     })
-    await repository.chat.save(newChat);
     count--;
+  }
+
+  chats.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())
+
+  for (const chat of chats) {
+    const newChat = ChatEntity.create(chat);
+    await repository.chat.save(newChat);
   }
 }
 
