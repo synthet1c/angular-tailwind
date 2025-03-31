@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChannelPage } from './channel.page';
 
-describe('ChannelPageComponent', () => {
+describe('ChannelComponent', () => {
   let component: ChannelPage;
   let fixture: ComponentFixture<ChannelPage>;
 

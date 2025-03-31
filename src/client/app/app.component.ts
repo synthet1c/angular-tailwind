@@ -1,10 +1,10 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {FirstComponent} from '#components/first/first.component';
+import {HeaderComponent} from '#components/first/header.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FirstComponent],
+  imports: [RouterOutlet, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   standalone: true,

@@ -1,0 +1,88 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="max-w-lg mx-auto p-6 bg-slate-800 shadow-md rounded-md space-y-4 text-slate-200 m-4"
+>
+  <!-- ID Field -->
+  <div>
+    <label for="id" class="block text-sm font-medium text-slate-300">ID</label>
+    <input
+      id="id"
+      type="number"
+      formControlName="id"
+      class="mt-1 block w-full p-2 bg-slate-700 border border-slate-600 rounded-md shadow-sm text-slate-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+    />
+  </div>
+
+  <!-- Channel Field -->
+  <div>
+    <label for="channel" class="block text-sm font-medium text-slate-300">Channel</label>
+    <input
+      id="channel"
+      type="text"
+      formControlName="channel"
+      class="mt-1 block w-full p-2 bg-slate-700 border border-slate-600 rounded-md shadow-sm text-slate-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+    />
+  </div>
+
+  <!-- Rule Name Field -->
+  <div>
+    <label for="ruleName" class="block text-sm font-medium text-slate-300">Rule Name</label>
+    <input
+      id="ruleName"
+      type="text"
+      formControlName="ruleName"
+      class="mt-1 block w-full p-2 bg-slate-700 border border-slate-600 rounded-md shadow-sm text-slate-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+    />
+  </div>
+
+  <!-- Description Field -->
+  <div>
+    <label for="description" class="block text-sm font-medium text-slate-300">Description</label>
+    <textarea
+      id="description"
+      formControlName="description"
+      class="mt-1 block w-full p-2 bg-slate-700 border border-slate-600 rounded-md shadow-sm text-slate-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+      rows="4"
+    ></textarea>
+  </div>
+
+<!--  <app-chat-rules-->
+<!--    label="My Chat Rules"-->
+<!--  ></app-chat-rules>-->
+
+  <!-- Subscriber Only Checkbox -->
+  <div class="flex items-center">
+    <input
+      id="subscriberOnly"
+      type="checkbox"
+      formControlName="subscriberOnly"
+      class="h-4 w-4 text-blue-600 bg-slate-700 border-slate-600 rounded focus:ring-blue-500"
+    />
+    <label for="subscriberOnly" class="ml-2 block text-sm text-slate-300">
+      Subscriber Only
+    </label>
+  </div>
+
+  <!-- Applies to Video Checkbox -->
+  <div class="flex items-center">
+    <input
+      id="appliesToVideo"
+      type="checkbox"
+      formControlName="appliesToVideo"
+      class="h-4 w-4 text-blue-600 bg-slate-700 border-slate-600 rounded focus:ring-blue-500"
+    />
+    <label for="appliesToVideo" class="ml-2 block text-sm text-slate-300">
+      Applies to Video
+    </label>
+  </div>
+
+  <!-- Submit Button -->
+  <button
+    type="submit"
+    [disabled]="form.invalid"
+    class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-slate-200 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+  >
+    Submit
+  </button>
+</form>

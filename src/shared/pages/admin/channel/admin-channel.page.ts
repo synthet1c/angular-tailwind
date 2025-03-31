@@ -6,17 +6,17 @@ import {map} from 'rxjs/operators';
 import {getParam} from '#utils/getParam';
 
 @Component({
-  selector: 'app-channel-page',
+  selector: 'app-admin-channel-page',
   imports: [
     SelectComponent,
     ChatListComponent,
   ],
-  templateUrl: './channel.page.html',
-  styleUrl: './channel.page.css',
+  templateUrl: './admin-channel.page.html',
+  styleUrl: './admin-channel.page.css',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChannelPage implements OnInit {
+export class AdminChannelPage implements OnInit {
 
   private route = inject(ActivatedRoute);
   public channel$ = this.route.paramMap.pipe(getParam('channel'))
@@ -26,7 +26,7 @@ export class ChannelPage implements OnInit {
 
   ngOnInit() {
     this.channel$.subscribe(channel => {
-      console.log('ChannelPage:ngOnInit', channel);
+      console.log('AdminChannelPage:ngOnInit', channel);
     });
   }
 
