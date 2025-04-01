@@ -7,7 +7,7 @@ import {ChatRulesComponent} from '#shared/pages/client/chat-rules/chat-rules.com
   selector: 'app-channel-page',
   imports: [
     ReactiveFormsModule,
-    ChatRulesComponent
+    // ChatRulesComponent
   ],
   templateUrl: './channel.page.html',
   styleUrl: './channel.page.css',
@@ -16,26 +16,34 @@ import {ChatRulesComponent} from '#shared/pages/client/chat-rules/chat-rules.com
 })
 export class ChannelPage {
 
-  form = new FormGroup({
-    id: new FormControl(null, [Validators.required]),
-    channel: new FormControl(null, [Validators.required]),
-    ruleName: new FormControl('', [Validators.required]),
-    description: new FormControl(''),
-    subscriberOnly: new FormControl(false),
-    appliesToVideo: new FormControl(false),
-    chatRules: new FormGroup({
-      selectedRule: new FormControl(''),
-    })
-  });
+  form: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    this.createForm();
+  }
+
+
+  private createForm() {
+    this.form = new FormGroup({
+      id: new FormControl(null, [Validators.required]),
+      channel: new FormControl(null, [Validators.required]),
+      ruleName: new FormControl('', [Validators.required]),
+      description: new FormControl(''),
+      subscriberOnly: new FormControl(false),
+      appliesToVideo: new FormControl(false),
+      chatRules: new FormGroup({
+        selectedRule: new FormControl(''),
+      })
+    });
+
+  }
 
   onSubmit(): void {
+    const formValue: any = this.form.value;
     if (this.form.valid) {
-      const formValue: any = this.form.value;
       console.log('Form Submitted:', formValue);
     } else {
-      console.error('Form is invalid');
+      console.error('Form is invalid', formValue);
     }
   }
 }

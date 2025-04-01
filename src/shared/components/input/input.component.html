@@ -1,0 +1,30 @@
+<div class="mb-4">
+  <label [htmlFor]="control?.name + '__' + id" *ngIf="label" class="block text-sm font-medium text-slate-300 mb-1">
+    {{ label }}
+  </label>
+  <input
+    [type]="type"
+    [id]="control?.name + '__' + id"
+    [placeholder]="placeholder"
+    [value]="value"
+    [disabled]="disabled"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+    class="block w-full rounded-md bg-slate-700 border border-slate-600 text-slate-200 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2"
+    placeholder="Enter your street number"
+    [ngClass]="{
+      'border-red-500 focus:ring-red-500 focus:border-red-500': showError(),
+      'border-gray-300': !showError(),
+      'bg-gray-100 text-gray-500': disabled
+    }"
+  />
+  <small *ngIf="control.errors?.['required'] && control?.touched" class="text-red-400">
+    {{label}} is required.
+  </small>
+  <small *ngIf="control.errors?.['minlength'] && control?.touched" class="text-red-400">
+    {{label}} is {{control.errors?.['minlength'].requiredLength - control.errors?.['minlength'].actualLength }} character too short.
+  </small>
+  <small *ngIf="control.errors?.['maxlength'] && control?.touched" class="text-red-400">
+    {{label}} is {{control.errors?.['maxlength'].actualLength - control.errors?.['maxlength'].requiredLength }} character too long.
+  </small>
+</div>

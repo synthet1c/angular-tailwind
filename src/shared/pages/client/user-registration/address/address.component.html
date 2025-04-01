@@ -1,0 +1,27 @@
+<div class="max-w-md mx-auto bg-slate-800 rounded-lg shadow-md">
+  <h2 class="text-2xl font-semibold text-slate-100 mb-4">Address</h2>
+  <ng-container [formGroup]="addressForm">
+
+    <app-input
+      type="text"
+      formControlName="street"
+      placeholder="Enter your street name"
+      label="Street"
+    ></app-input>
+
+    <app-input
+      type="text"
+      formControlName="streetNumber"
+      placeholder="Enter your street number"
+      label="Street number"
+    ></app-input>
+
+    <app-input
+      type="text"
+      formControlName="postcode"
+      placeholder="Enter your postcode"
+      label="Postcode"
+    ></app-input>
+
+  </ng-container>
+</div>

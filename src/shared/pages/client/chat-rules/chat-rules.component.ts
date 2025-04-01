@@ -18,8 +18,9 @@ import {
 })
 export class ChatRulesComponent implements OnInit, OnDestroy {
 
-  formGroupName = "chatRules";
+  @Input() formGroupName = "chatRules";
   @Input() label = "Chat Rules";
+  chatRulesForm: FormGroup;
 
   chatRules = CHAT_RULES;
 
@@ -30,6 +31,7 @@ export class ChatRulesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.chatRulesForm = this.rootFormGroup.control.get(this.formGroupName) as FormGroup;
     console.log('parentFormGroup', {
       rules: this.chatRules,
       form: this.form,

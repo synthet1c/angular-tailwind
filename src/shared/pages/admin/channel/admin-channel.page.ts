@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
-import {SelectComponent} from '#components/select/select.component';
+import {SortComponent} from '#components/sort/sort.component';
 import {ChatListComponent} from '#components/chat-list/chat-list.component';
 import {ActivatedRoute} from '@angular/router';
 import {map} from 'rxjs/operators';
@@ -8,7 +8,7 @@ import {getParam} from '#utils/getParam';
 @Component({
   selector: 'app-admin-channel-page',
   imports: [
-    SelectComponent,
+    SortComponent,
     ChatListComponent,
   ],
   templateUrl: './admin-channel.page.html',
