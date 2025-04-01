@@ -11,12 +11,12 @@ import {ChatService} from '#services/chat/chat.service';
     FormsModule,
     NgForOf
   ],
-  templateUrl: './select.component.html',
-  styleUrl: './select.component.css',
+  templateUrl: './sort.component.html',
+  styleUrl: './sort.component.css',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectComponent implements OnInit {
+export class SortComponent implements OnInit {
 
   chatService = inject(ChatService);
 
@@ -29,12 +29,12 @@ export class SelectComponent implements OnInit {
   ]
 
   ngOnInit() {
-    console.log('SelectComponent:onInit');
+    console.log('SortComponent:onInit');
   }
 
   sort(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
-    console.log('SelectComponent:sort', event);
+    console.log('SortComponent:sort', event);
     this.chatService.sort(selectElement.value as Chat.Sort);
   }
 }
