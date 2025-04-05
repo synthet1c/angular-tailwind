@@ -1,0 +1,18 @@
+<div class="flex items-center mb-2">
+  <input
+    [type]="type"
+    [id]="label"
+    [value]="value"
+    [disabled]="disable"
+    [checked]="checked"
+    (change)="onInputChange($event)"
+    class="h-4 w-4 text-blue-500 bg-slate-700 border border-slate-600 focus:ring-blue-500 rounded cursor-pointer"
+  />
+  <label
+    [for]="label"
+    class="ml-2 text-sm font-medium text-slate-300 cursor-pointer"
+    [ngClass]="{ 'cursor-not-allowed': disable }"
+  >
+    {{ label }}
+  </label>
+</div>

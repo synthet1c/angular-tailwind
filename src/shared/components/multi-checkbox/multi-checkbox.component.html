@@ -1,0 +1,30 @@
+<div class="mb-4">
+  <!-- Group Label -->
+  @if (label) {
+    <label class="block text-sm font-medium text-slate-300 mb-1">
+      {{ label }}
+    </label>
+  }
+  <!-- Multi-Checkbox Options -->
+  <div class="space-y-2">
+    <div
+      *ngFor="let option of options; let i = index"
+      class="flex items-center space-x-3"
+    >
+      <input
+        type="checkbox"
+        [id]="option.key + '__' + i"
+        [checked]="isChecked(option.key)"
+        [disabled]="disabled"
+        (change)="onCheckboxChange(option.key, $event.target.checked)"
+        class="h-4 w-4 text-blue-500 bg-slate-700 border border-slate-600 rounded focus:ring-blue-500 cursor-pointer"
+      />
+      <label
+        [for]="option.key + '__' + i"
+        class="text-sm text-slate-300 cursor-pointer"
+      >
+        {{ option.label }}
+      </label>
+    </div>
+  </div>
+</div>

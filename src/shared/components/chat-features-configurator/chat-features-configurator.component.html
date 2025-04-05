@@ -1,0 +1,29 @@
+<ng-container [formGroup]="formGroup">
+
+  <h2 class="text-2xl font-semibold text-slate-100 mb-4">Chat features</h2>
+  <p class="text-slate-400 mb-4">Use this to make custom features for your super chats</p>
+
+  <!-- Dynamically render chat rules -->
+  <div formArrayName="types">
+    <div
+      *ngFor="let rule of typesFormArray.controls; let i = index"
+      [formGroupName]="i"
+      class="flex mb-4 gap-1"
+    >
+      <h1>{{ rule.get('key').value }}</h1>
+    </div>
+  </div>
+
+<!--  &lt;!&ndash; Add Rule Button &ndash;&gt;-->
+<!--  <div class="flex justify-end">-->
+<!--    <button-->
+<!--      type="button"-->
+<!--      (click)="addRule()"-->
+<!--      class="bg-blue-600 text-white px-6 py-2 rounded shadow hover:bg-blue-700 transition justify-self-end"-->
+<!--    >-->
+<!--      Add Feature-->
+<!--    </button>-->
+<!--  </div>-->
+
+</ng-container>
+
