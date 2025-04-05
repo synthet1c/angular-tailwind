@@ -33,6 +33,21 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     // Custom initialization if needed
   }
 
+  onInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.value = value;
+    this.onChange(value);
+  }
+
+  onBlur(): void {
+    this.touched = true;
+    this.onTouched();
+  }
+
+  showError(): boolean {
+    return this.control?.invalid && (this.control?.touched || this.touched);
+  }
+
   writeValue(value: any): void {
     this.value = value;
   }
@@ -49,18 +64,4 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     this.disabled = isDisabled;
   }
 
-  onInput(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.value = value;
-    this.onChange(value);
-  }
-
-  onBlur(): void {
-    this.touched = true;
-    this.onTouched();
-  }
-
-  showError(): boolean {
-    return this.control?.invalid && (this.control?.touched || this.touched);
-  }
 }

@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,3 +11,21 @@ body {
   display: flex;
   background: var(--color-slate-950);
 }
+
+.hr-gradient {
+  @apply w-full h-[4px] bg-gradient-to-r from-slate-300 via-slate-950 to-slate-300 my-8 mx-2;
+}
+
+.hr {
+  @apply border-t-[1px] border-t-slate-900 border-b-[1px] border-b-slate-700 relative w-[95%] h-[5px] my-8;
+}
+
+.border-3d {
+  @apply border-[1px] border-slate-900 border-t-slate-600 border-b-slate-950;
+}
+
+.btn {
+  @apply bg-blue-600 text-white font-semibold py-2 mt-6 px-4 rounded-md hover:bg-blue-700 transition duration-300
+  disabled:bg-slate-900 disabled:text-slate-800
+}
+

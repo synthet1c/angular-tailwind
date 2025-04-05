@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ChatConfig} from '#models';
-import {ChatRulesComponent} from '#shared/pages/client/chat-rules/chat-rules.component';
+import {ChatRulesComponent} from '#components/chat-rules/chat-rules.component';
 
 @Component({
   selector: 'app-channel-page',

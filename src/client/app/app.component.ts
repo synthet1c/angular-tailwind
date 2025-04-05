@@ -1,6 +1,6 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {HeaderComponent} from '#components/first/header.component';
+import {HeaderComponent} from '#components/header/header.component';
 
 @Component({
   selector: 'app-root',

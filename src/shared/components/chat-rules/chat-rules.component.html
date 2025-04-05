@@ -1,0 +1,57 @@
+<ng-container [formGroup]="chatRulesForm">
+  <app-select
+    formControlName="selectedRule"
+    label="Chat Rules"
+    placeholder="Please choose a rule"
+    [options]="chatRules"
+  ></app-select>
+
+  <!-- Dynamically render chat rules -->
+  <div formArrayName="rules">
+    <div
+      *ngFor="let rule of rulesFormArray.controls; let i = index"
+      [formGroupName]="i"
+      class="flex items-center mb-4 px-4"
+    >
+      <div class="flex-1">
+        <input
+          formControlName="key"
+          id="key-{{ i }}"
+          type="hidden"
+          [value]="rule.get('key').value"
+        />
+        <app-input
+          formControlName="value"
+          id="value-{{ i }}"
+          [label]="rule.get('name').value"
+          type="text"
+          [placeholder]="rule.get('placeholder').value"
+        />
+      </div>
+
+      <div class="flex end ml-4 mt-2">
+        <button
+          type="button"
+          (click)="removeRule(i)"
+          class="ml-4 bg-red-800 text-white px-4 py-2 rounded shadow hover:bg-red-700 justify-self-end"
+        >
+          X
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Add Rule Button -->
+  <div class="mt-6">
+    <button
+      type="button"
+      (click)="addRule()"
+      class="bg-blue-600 text-white px-6 py-2 rounded shadow hover:bg-blue-700"
+    >
+      Add Rule
+    </button>
+  </div>
+
+</ng-container>
+
