@@ -21,15 +21,15 @@ export interface ChatFeatureFormGroup {
   key: FormControl<string>; // Unique key for the feature
   name: FormControl<string>; // Display name for the feature
   enabled: FormControl<boolean>; // Whether the feature is enabled
-  options?: FormArray<FormGroup<ChatOptionFormGroup>>; // Nested options array (optional)
-  conditions?: FormArray<FormGroup<ChatOptionFormGroup>>; // Nested conditions array (optional)
+  options: FormArray<FormGroup<ChatOptionFormGroup>>; // Nested options array
+  conditions: FormArray<FormGroup<ChatOptionFormGroup>>; // Nested conditions array
 }
 
 export interface ChatOptionFormGroup {
-  key: FormControl<string>; // Value of the option
-  name: FormControl<string>; // Value of the option
-  type: FormControl<string>; // Value of the option
-  value: FormControl<string>; // Value of the option
+  key: FormControl<string>; // Key of the option or rule
+  name: FormControl<string>; // Name or description of the option/rule
+  type: FormControl<string>; // Type of the option/rule
+  value: FormControl<string>; // Value to be provided (if applicable)
 }
 
 @Component({
@@ -119,30 +119,30 @@ export class ChatFeaturesConfiguratorComponent implements OnInit, OnDestroy {
   }
 
   initFormGroup(features: ChatFeature[]): FormArray<FormGroup<ChatFeatureFormGroup>> {
-    return new FormArray<ChatFeatureFormGroup>(
-      features.map((feature): ChatFeatureFormGroup =>
+    return this.fb.array(
+      features.map((feature: ChatFeature): FormGroup<ChatFeatureFormGroup> =>
         this.fb.group<ChatFeatureFormGroup>({
-          key: feature.key,
-          name: feature.name,
+          key: this.fb.control(feature.key, Validators.required),
+          name: this.fb.control(feature.name, Validators.required),
           enabled: this.fb.control(true, Validators.required),
-          ...(feature.options && { options: this.createFormOptions(feature.options) }),
-          ...(feature.conditions && { conditions: this.createFormOptions(feature.conditions) })
-        }) as FormGroup<ChatFeatureFormGroup>
-      ),
-    ) as FormArray<FormGroup<ChatFeatureFormGroup>>
-  }
-
-  createFormOptions(options: ChatRule[]): FormArray<FormGroup<ChatFeatureFormGroup>> {
-    return this.fb.array<FormGroup<ChatFeatureFormGroup>>(
-      options.map((option: ChatRule): ChatOptionFormGroup =>
-        this.fb.group<ChatOptionFormGroup>({
-          key: this.fb.control(option.key),
-          name: this.fb.control(option.name),
-          type: this.fb.control(option.type),
-          value: this.fb.control(this.fb.control('', Validators.required)),
+          options: this.createFormOptions(feature.options || []), // Create empty array if no options
+          conditions: this.createFormOptions(feature.conditions || []), // Create empty array if no conditions
         })
       )
-    )
+    );
+  }
+
+  createFormOptions(rules: ChatRule[]): FormArray<FormGroup<ChatOptionFormGroup>> {
+    return this.fb.array(
+      rules.map((rule: ChatRule): FormGroup<ChatOptionFormGroup> =>
+        this.fb.group<ChatOptionFormGroup>({
+          key: this.fb.control(rule.key, Validators.required),
+          name: this.fb.control(rule.name, Validators.required),
+          type: this.fb.control(rule.type, Validators.required),
+          value: this.fb.control('', Validators.required), // Default value required for inputs
+        })
+      )
+    );
   }
 
   /**

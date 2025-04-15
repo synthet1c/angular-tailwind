@@ -31,6 +31,14 @@ export const CHAT_RULES: ChatRule[] = [
     name: 'User role',
     description: 'User role to qualify',
     type: 'number',
+    types: [
+      {
+        key: 'role.admin',
+        name: 'Admin',
+        description: 'Admin',
+        type: 'string',
+      }
+    ]
   },
 ];
 

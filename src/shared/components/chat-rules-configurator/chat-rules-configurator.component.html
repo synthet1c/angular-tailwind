@@ -30,12 +30,24 @@
       </div>
 
       <div class="flex-1">
-        <app-input
-          formControlName="value"
-          id="value-{{ i }}"
-          placeholder="Value"
-          type="text"
-        />
+        @if (rule.get('key').value === 'role') {
+          <app-select
+            formControlName="value"
+            id="key-{{ i }}"
+            placeholder="Rule"
+            [options]="chatRules"
+            [value]="rule.get('key').value"
+            (change)="onRuleChange($event)"
+          ></app-select>
+        } @else {
+          <app-input
+            formControlName="value"
+            id="value-{{ i }}"
+            placeholder="Value"
+            type="text"
+          />
+        }
+
       </div>
 
       <div class="">
